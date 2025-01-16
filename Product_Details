@@ -1,0 +1,902 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .product-container {
+            background: #fff;
+            padding: 30px;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .product-images {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+        .slider {
+            position: relative;
+            max-width: 100%;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+            display: none;
+        }
+        .slides img.active {
+            display: block;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            cursor: pointer;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .product-info {
+            margin-top: 20px;
+        }
+        .product-title {
+            font-size: 28px;
+            margin: 20px 0;
+        }
+        .product-price {
+            font-size: 24px;
+            color: #dc3545;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .product-description {
+            font-size: 18px;
+            color: #6c757d;
+            margin: 20px 0;
+        }
+        .delivery-details {
+            font-size: 16px;
+            color: #28a745;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .product-rating {
+            margin: 20px 0;
+        }
+        .stars {
+            color: #ffc107;
+            font-size: 20px;
+        }
+        .buy-now-button {
+            display: block;
+            text-align: center;
+            margin: 20px auto 0;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .buy-now-button:hover {
+            background-color: #0056b3;
+        }
+        .user-reviews {
+            margin: 20px 0;
+        }
+        .review {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: flex;
+            gap: 15px;
+        }
+        .review img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .review h3 {
+            margin: 0 0 10px 0;
+        }
+        .review-images {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .review-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 30px;
+            border-radius: 10px 10px 0 0;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+ <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Carousel container */
+        .product-image-carousel {
+            width: 100%;
+            max-width: 100%;  /* Allow it to take full width */
+            margin: 0 auto;    /* Center the carousel */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Carousel images container */
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Image styling */
+        .carousel-images img {
+            width: 100%;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        /* Navigation buttons */
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 10;
+        }
+
+        .carousel-button.left {
+            left: 10px;
+        }
+
+        .carousel-button.right {
+            right: 10px;
+        }
+
+        /* Optional: Add styles for the dots (indicators) */
+        .carousel-indicators {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .carousel-indicators span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-indicators .active {
+            background-color: #333;
+        }
+
+        /* Responsive Design */
+        /* On small screens, make the carousel image container full-width */
+        @media (max-width: 768px) {
+            .product-image-carousel {
+                max-width: 100%;
+            }
+
+            /* Adjust button size and position for mobile */
+            .carousel-button {
+                font-size: 20px;
+                padding: 8px;
+            }
+
+            /* Adjust the size of the dots for smaller screens */
+            .carousel-indicators span {
+                width: 8px;
+                height: 8px;
+                margin: 0 4px;
+            }
+        }
+
+        /* On even smaller screens, we can fine-tune things further */
+        @media (max-width: 480px) {
+            .carousel-button {
+                font-size: 18px;
+                padding: 6px;
+            }
+
+            .carousel-indicators span {
+                width: 6px;
+                height: 6px;
+            }
+        }
+    </style>
+
+</style>
+
+
+</head>
+<body>
+<div class="product-container">
+    <!-- Product Image Carousel -->
+    <div class="product-image-carousel">
+        <div class="carousel-images">
+            <img src="https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg" alt="Product Image 1">
+            <img src="https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg" alt="Book Image 2" alt="Product Image 2">
+            <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" alt="Book Image 3" alt="Product Image 3">
+            <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" alt="Book Image 4" alt="Product Image 4">
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <button class="carousel-button left">←</button>
+        <button class="carousel-button right">→</button>
+    </div>
+
+    <!-- Dots for Navigation -->
+    <div class="carousel-indicators">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+        <style>
+
+            .strike-price {
+              font-size: 18px;
+              color: #999;
+              text-decoration: line-through;
+              margin-right: 15px;
+            }
+            </style>
+
+        <!-- Product Info Section (Title, Price, Description) -->
+        <div class="product-info">
+            <h1 class="product-title">
+                <strong>Samsung Galaxy S23 Ultra 5G AI Smartphone (Green, 12GB, 256GB Storage)</strong>
+            </h1>
+            <p class="product-price">
+                <strong>₹72,999</strong>          <span class="strike-price">₹1999</span>
+
+            </p>
+            <p class="product-description">
+                <strong>Experience the power of Galaxy AI with S23 Ultra</strong> to effortlessly perfect your photos with Photo Assist, communicate quickly outside your language with Live Translate or pick the right tone with Chat Assist. Galaxy AI makes your memories brighter, your communication easier, and your tone nicer, letting you sail through life effortlessly, just like that!<br><br>
+                <strong>200MP. Wow-worthy resolution</strong> - Resolution on the Wide-angle Camera has nearly doubled, delivering strikingly clear photos. Zoom and crop your shots for a whole new view — or leave it intact for brilliant detail, corner to corner.<br><br>
+                <strong>Power for those who don't pause</strong> - Your quest for epic mobile gaming is over. Snapdragon 8 Gen 2 Mobile Platform for Galaxy optimizes and streamlines your device for silky smooth games — without draining the battery.<br><br>
+                <strong>Note's signature tool comes built-in</strong> - The built-in S Pen keeps the legacy of Note alive. Plus, it helps you ditch the dependency on notebooks, making sketches and jotting notes effortless and eco-friendly.<br><br>
+                <strong>More innovation, less footprint</strong> – Galaxy S23 Ultra's striking symmetrical design returns with one major difference: recycled and eco-conscious materials. From the metal frame to the glass finish, it's polished with fresh new colors inspired by nature.
+            </p>
+            <p class="delivery-details">
+                <strong>Delivered in 4 days all over India.</strong>
+            </p>
+        </div>
+        
+        <!-- Product Rating Section -->
+        <div class="product-rating">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>5 stars based on 100 reviews</p>
+        </div>
+
+        <!-- Buy Now Button -->
+    </style>
+
+
+    <style>
+        /* Basic styles for the pop-up */
+        .popup {
+          display: none; /* Initially hidden */
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+          justify-content: center;
+          align-items: center;
+          z-index: 1000; /* Make sure the popup stays above other content */
+        }
+        
+        /* Popup content box styling */
+        .popup-content {
+          position: relative;
+          background-color: white;
+          width: 90%; /* Use 90% of the screen width for the pop-up */
+          height: 90%; /* Use 90% of the screen height */
+          padding: 10px; /* Some padding for aesthetics */
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px; /* Slight rounded corners for better appearance */
+          overflow: hidden; /* Ensure nothing goes outside the container */
+        }
+        
+        /* Close button styling */
+        .close-btn {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: 30px;
+          cursor: pointer;
+          background: none;
+          border: none;
+          color: black;
+          font-weight: bold;
+        }
+        
+        /* Button to trigger the pop-up */
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          margin: 20px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+        }
+        
+        /* Make the iframe fill the entire content area */
+        iframe {
+          width: 100%;
+          height: 100%;
+          border: none; /* Remove the border from the iframe */
+          display: block;
+        }
+        
+        /* Circular Loader Styles */
+        .loader {
+          border: 8px solid #f3f3f3; /* Light grey background color */
+          border-top: 8px solid #4CAF50; /* Green color for the spinner */
+          border-radius: 50%;
+          width: 50px; /* Adjust size */
+          height: 50px; /* Adjust size */
+          animation: spin 1.5s linear infinite;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%); /* Center the loader */
+          display: none; /* Hidden by default */
+        }
+        
+        /* Spin animation */
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        </style>
+
+
+
+
+
+<style>
+    /* Style For Note */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 10px;
+    }
+
+    .note-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .note-container h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .note-message {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        border-radius: 5px;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .note-container p {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .cta {
+        display: inline-block;
+        padding: 12px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .cta:hover {
+        background-color: #0056b3;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+        .note-container {
+            margin: 20px;
+            padding: 15px;
+        }
+
+        .note-container h2 {
+            font-size: 20px;
+        }
+
+        .note-message {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .cta {
+            padding: 10px 18px;
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .note-container {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .note-container h2 {
+            font-size: 18px;
+        }
+
+        .note-message {
+            font-size: 12px;
+            padding: 6px;
+        }
+
+        .cta {
+            padding: 8px 15px;
+            font-size: 12px;
+        }
+
+        .note-container p {
+            font-size: 12px;
+        }
+    }
+
+</style>
+
+<!-- Note For addess  -->
+<div class="note-container">
+    <h2>Important Notice</h2>
+    <div class="note-message">
+        Please Enter your Delivery Address Before Payment
+    </div>
+    <p>If you haven't entered your delivery address yet, please do so before proceeding with the payment.</p>
+    <button onclick="openPopup('https://docs.google.com/forms/d/e/1FAIpQLSfjuWMOWwKe7Pb4tAnf3rRXHFam04bk6ujL9aWD1F_PLoGKvw/viewform')">Shipping Address</button>
+</div>
+
+
+    <!-- Button to trigger the pop-up -->
+
+    <!-- The Pop-up structure -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">×</span>
+        
+        <!-- Loader element to show while the iframe is loading -->
+        <div id="loader" class="loader"></div>
+        
+        <!-- Iframe to display external content -->
+        <iframe id="popup-frame" src="" frameborder="0" onload=""></iframe>
+      </div>
+    </div>
+  
+    <script>
+  // Function to open the popup with the specified URL
+  function openPopup(url) {
+    // Set the iframe's source to the link
+    document.getElementById('popup-frame').src = url;
+    // Show the popup
+    document.getElementById('popup').style.display = 'flex';
+    // Show the loader
+    document.getElementById('loader').style.display = 'block';
+      document.getElementById('loader').style.display = 'none';
+  }
+  
+  // Function to close the popup
+  function closePopup() {
+    // Hide the popup and clear the iframe's content
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('popup-frame').src = '';
+  }
+  </script>
+          
+        <a href="upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPaGE7dr2rsDsOjqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=10.00" class="buy-now-button">Buy Now</a>
+    </div>
+</div>
+
+    <!-- User Reviews Section with Dress Images -->
+    <div class="user-reviews">
+        <h2>User Reviews</h2>
+        
+        <!-- Review 1 -->
+        <div class="review">
+            <img src="https://p0.pxfuel.com/preview/399/258/365/boy-face-blur-indian-royalty-free-thumbnail.jpg" alt="Reviewer 1" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
+            <div>
+                <h3>Jane Doe</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>This product is amazing! It exceeded my expectations and I would highly recommend it to anyone.</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/71DNOJ05uML.jpg" class="review-image" alt="Dress 1" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/81GrustqvUL.jpg" class="review-image" alt="Dress 2" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review">
+            <img src="https://th.bing.com/th/id/OIP.Ep07we1LvdYXc7jL6tAbaAHaLH?rs=1&pid=ImgDetMain" alt="Reviewer 2" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
+            <div>
+                <h3>John Smith</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>Great value for money. The features are exactly as described, and it works flawlessly.</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" class="review-image" alt="Dress 3" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/71DNOJ05uML.jpg" class="review-image" alt="Dress 4" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review">
+            <img src="https://roesome.com/wp-content/uploads/2013/05/Portrait-Photography-in-Bangalore-Teenage-Portraits-3.jpg" alt="Reviewer 3" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
+            <div>
+                <h3>Alice Brown</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>The camera quality is amazing! Best smartphone I have ever used.</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/81GrustqvUL.jpg" class="review-image" alt="Dress 5" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg" class="review-image" alt="Dress 6" onclick="openModal('https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review">
+            <img src="https://th.bing.com/th/id/OIP.kVPmqzKQ5eUfADLWSiJ52gHaHa?rs=1&pid=ImgDetMain" alt="Reviewer 4" onclick="openModal('https://m.media-amazon.com/images/I/41lTRT5n1lL._SY445_.jpg')">
+            <div>
+                <h3>David Miller</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>I am very happy with this product. The design is sleek, and the performance is top-notch!</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/41lTRT5n1lL._SY445_.jpg" class="review-image" alt="Dress 7" onclick="openModal('https://m.media-amazon.com/images/I/41lTRT5n1lL._SY445_.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/71DNOJ05uML.jpg" class="review-image" alt="Dress 8" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review">
+            <img src="https://ruralindiaonline.org/media/images/IMG_3458_Mohammed_Afsal_T.P..height-1080.jpg" alt="Reviewer 5" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+            <div>
+                <h3>Emily Johnson</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>The battery life lasts longer than expected! Very impressed with its efficiency.</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg" class="review-image" alt="Dress 9" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/71DNOJ05uML.jpg" class="review-image" alt="Dress 10" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="review">
+            <img src="https://th.bing.com/th/id/OIP.-TYq2e789dn0WQY1aaALMwAAAA?w=400&h=500&rs=1&pid=ImgDetMain" alt="Reviewer 6" onclick="openModal('https://m.media-amazon.com/images/I/71GrustqvUL.jpg')">
+            <div>
+                <h3>George Wilson</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>Truly a remarkable product! I love the speed and fluidity of this device.</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/71GrustqvUL.jpg" class="review-image" alt="Dress 11" onclick="openModal('https://m.media-amazon.com/images/I/71GrustqvUL.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg" class="review-image" alt="Dress 12" onclick="openModal('https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 7 -->
+        <div class="review">
+            <img src="https://ruralindiaonline.org/media/original_images/Fazhar_Ghosh_FACE_31.jpg" alt="Reviewer 7" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+            <div>
+                <h3>Jessica Clark</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>This phone's camera is the best in its class. Highly recommend for anyone looking for a great mobile photography experience.</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg" class="review-image" alt="Dress 13" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/71GrustqvUL.jpg" class="review-image" alt="Dress 14" onclick="openModal('https://m.media-amazon.com/images/I/71GrustqvUL.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 8 -->
+        <div class="review">
+            <img src="https://www.dakshana.org/wp-content/uploads/2017/10/2597.png" alt="Reviewer 8" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
+            <div>
+                <h3>Michael Evans</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>The device is super fast, and the display quality is stunning! I am loving it so far.</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/81GrustqvUL.jpg" class="review-image" alt="Dress 15" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg" class="review-image" alt="Dress 16" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 9 -->
+        <div class="review">
+            <img src="https://images.squarespace-cdn.com/content/v1/605038d5d854783f2f2ef64c/1615953310692-Y3HQVWQD6O9H6IT3CK3B/Victims-of-Rana-Plaza_2.jpg" alt="Reviewer 9" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
+            <div>
+                <h3>Sophie Adams</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>I can't get enough of this phone. It's fast, sleek, and stylish.</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" class="review-image" alt="Dress 17" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/81GrustqvUL.jpg" class="review-image" alt="Dress 18" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 10 -->
+        <div class="review">
+            <img src="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png" alt="Reviewer 10" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
+            <div>
+                <h3>Lucas Carter</h3>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>Solid purchase, highly recommend this phone for anyone who values camera performance and battery life!</p>
+                <div class="review-images">
+                    <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" class="review-image" alt="Dress 19" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg" class="review-image" alt="Dress 20" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage" src="">
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides();
+        }
+
+        function showSlides() {
+            const slides = document.querySelectorAll('.slides img');
+            if (slideIndex >= slides.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = slides.length - 1;
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function openModal(imageSrc) {
+            const modal = document.getElementById("modal");
+            const modalImage = document.getElementById("modalImage");
+            modal.style.display = "block";
+            modalImage.src = imageSrc;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("modal");
+            modal.style.display = "none";
+        }
+    </script>
+
+
+<script>
+    // JavaScript to handle navigation and swipe events
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.carousel-images img');
+    const totalImages = images.length;
+    const carouselImages = document.querySelector('.carousel-images');
+    const dots = document.querySelectorAll('.carousel-indicators .dot');
+
+    let startTouch = 0;  // To store the initial touch position
+
+    // Function to change the slide
+    function updateCarousel() {
+        // Move the carousel to the current slide
+        carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Update the active dot
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentIndex].classList.add('active');
+    }
+
+    // Function to move to the next image
+    function slideImages() {
+        currentIndex = (currentIndex + 1) % totalImages;  // Loop back to the first image
+        updateCarousel();
+    }
+
+    // Left button navigation
+    document.querySelector('.carousel-button.left').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        updateCarousel();
+    });
+
+    // Right button navigation
+    document.querySelector('.carousel-button.right').addEventListener('click', () => {
+        slideImages();
+    });
+
+    // Optional: Click on the dot to jump to that image
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentIndex = index;
+            updateCarousel();
+        });
+    });
+
+    // Handle swipe events
+    carouselImages.addEventListener('touchstart', (e) => {
+        startTouch = e.touches[0].clientX;
+    });
+
+    carouselImages.addEventListener('touchmove', (e) => {
+        const moveTouch = e.touches[0].clientX;
+        const touchDifference = startTouch - moveTouch;
+
+        // If the user swipes left (negative movement)
+        if (touchDifference > 50) {
+            currentIndex = (currentIndex + 1) % totalImages;
+            updateCarousel();
+            startTouch = 0;  // Reset after the swipe
+        }
+        // If the user swipes right (positive movement)
+        else if (touchDifference < -50) {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            updateCarousel();
+            startTouch = 0;  // Reset after the swipe
+        }
+    });
+
+    // Initialize the carousel by updating the first image
+    updateCarousel();
+</script>
+
+
+
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+        <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a>
+        </p>
+    </footer>
+
+</body>
+</html>
