@@ -320,10 +320,10 @@
     <!-- Product Image Carousel -->
     <div class="product-image-carousel">
         <div class="carousel-images">
-            <img src="https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg" alt="Product Image 1">
-            <img src="https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg" alt="Book Image 2" alt="Product Image 2">
-            <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" alt="Book Image 3" alt="Product Image 3">
-            <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" alt="Book Image 4" alt="Product Image 4">
+            <img src="https://media.karousell.com/media/photos/products/2023/3/16/acrylic_soft_mirror_1678985513_703563ca.jpg" alt="Product Image 1">
+            <img src="https://lzd-img-global.slatic.net/g/p/3b63f0c8b1020444ca84c24c26a607ae.jpg_720x720q80.jpg" alt="Book Image 2" alt="Product Image 2">
+            <img src="https://down-my.img.susercontent.com/file/my-11134207-7qukw-lhfw5xx5vhel51" alt="Book Image 3" alt="Product Image 3">
+            <img src="https://m.media-amazon.com/images/I/51m7jmN1iCL._AC_SX522_.jpg" alt="Book Image 4" alt="Product Image 4">
         </div>
         
         <!-- Navigation Buttons -->
@@ -352,29 +352,33 @@
         <!-- Product Info Section (Title, Price, Description) -->
         <div class="product-info">
             <h1 class="product-title">
-                <strong>Samsung Galaxy S23 Ultra 5G AI Smartphone (Green, 12GB, 256GB Storage)</strong>
+                <strong>Non-Breakable Vertical Mirror</strong>
             </h1>
             <p class="product-price">
-                <strong>₹72,999</strong>          <span class="strike-price">₹1999</span>
+                <strong>₹79</strong>          <span class="strike-price">₹599</span>
 
             </p>
             <p class="product-description">
-                <strong>Experience the power of Galaxy AI with S23 Ultra</strong> to effortlessly perfect your photos with Photo Assist, communicate quickly outside your language with Live Translate or pick the right tone with Chat Assist. Galaxy AI makes your memories brighter, your communication easier, and your tone nicer, letting you sail through life effortlessly, just like that!<br><br>
-                <strong>200MP. Wow-worthy resolution</strong> - Resolution on the Wide-angle Camera has nearly doubled, delivering strikingly clear photos. Zoom and crop your shots for a whole new view — or leave it intact for brilliant detail, corner to corner.<br><br>
-                <strong>Power for those who don't pause</strong> - Your quest for epic mobile gaming is over. Snapdragon 8 Gen 2 Mobile Platform for Galaxy optimizes and streamlines your device for silky smooth games — without draining the battery.<br><br>
-                <strong>Note's signature tool comes built-in</strong> - The built-in S Pen keeps the legacy of Note alive. Plus, it helps you ditch the dependency on notebooks, making sketches and jotting notes effortless and eco-friendly.<br><br>
-                <strong>More innovation, less footprint</strong> – Galaxy S23 Ultra's striking symmetrical design returns with one major difference: recycled and eco-conscious materials. From the metal frame to the glass finish, it's polished with fresh new colors inspired by nature.
+                <h2>Non-Breakable Vertical Mirror</h2>
+
+<p>Enhance your space with our <strong>Non-Breakable Vertical Mirror Sticker</strong>, the perfect combination of style, practicality, and safety. This innovative mirror solution provides the reflective effect of a traditional mirror without the fragility or heavy installation requirements. Ideal for homes, offices, or any interior space, this self-adhesive mirror sticker is easy to apply and offers long-lasting durability.</p><br>
+
+<h3>Key Features:</h3><br>
+<ul>
+  <li><strong>Non-Breakable Material:</strong> Made from a flexible, shatterproof material, this mirror sticker ensures safety in homes with children or pets, offering the look of glass without the risk of breakage.</li>
+  <li><strong>Effortless Installation:</strong> Peel off the backing, stick to any smooth, clean surface, and enjoy an instant transformation—no drilling, nails, or heavy tools required.</li>
+  <li><strong>Sleek Vertical Design:</strong> Perfect for narrow spaces such as corridors, bedrooms, or bathrooms, the vertical shape provides a modern and stylish touch to any room.</li>
+  <li><strong>Lightweight & Durable:</strong> Designed to last, this mirror sticker maintains its reflective quality and smooth surface over time, even in high-traffic areas.</li>
+  <li><strong>Space-Saving & Functional:</strong> Ideal for smaller spaces, the mirror creates a sense of openness and light, without taking up valuable space like traditional mirrors.</li>
+</ul>
+
             </p>
             <p class="delivery-details">
                 <strong>Delivered in 4 days all over India.</strong>
             </p>
         </div>
         
-        <!-- Product Rating Section -->
-        <div class="product-rating">
-            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p>5 stars based on 100 reviews</p>
-        </div>
+        
 
         <!-- Buy Now Button -->
     </style>
@@ -579,6 +583,65 @@
 
 </style>
 
+<style>/* Modal styles Square Size*/
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0); /* Black background */
+        background-color: rgba(0,0,0,0.9); /* Black with opacity */
+        text-align: center;
+    }
+    
+    /* Modal content (image) */
+    .modal-content {
+        max-width: 100%;
+        max-height: 100%;
+        margin: auto;
+        display: block;
+        width: 100px;  /* Increased size for preview */
+        height: 100px; /* Increased size for square */
+        object-fit: cover; /* To make it square and fill the area */
+    }
+    
+    /* Close button style */
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    </style>
+
+    <script>function openModal(imageSrc) {
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        modal.style.display = "block";
+        modalImg.src = imageSrc; // Set the image source to the clicked image
+    }
+    
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none"; // Close the modal when clicking the close button
+    }
+    </script>
+
 <!-- Note For addess  -->
 <div class="note-container">
     <h2>Important Notice</h2>
@@ -586,7 +649,7 @@
         Please Enter your Delivery Address Before Payment
     </div>
     <p>If you haven't entered your delivery address yet, please do so before proceeding with the payment.</p>
-    <button onclick="openPopup('https://docs.google.com/forms/d/e/1FAIpQLSfjuWMOWwKe7Pb4tAnf3rRXHFam04bk6ujL9aWD1F_PLoGKvw/viewform')">Shipping Address</button>
+    <button onclick="openPopup('https://docs.google.com/forms/d/e/1FAIpQLSczOXja-qRo719Blh0XrHMk7oSDLoVXC-KgPV9INgmyxb-qlg/viewform?usp=sharing')">Shipping Address</button>
 </div>
 
 
@@ -625,25 +688,37 @@
   }
   </script>
           
-        <a href="upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPaGE7dr2rsDsOjqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=10.00" class="buy-now-button">Buy Now</a>
+        <a href="upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00" class="buy-now-button">Buy Now</a>
     </div>
 </div>
 
     <!-- User Reviews Section with Dress Images -->
     <div class="user-reviews">
+        <!-- Product Rating Section -->
+        <div class="product-rating">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>5 stars based on 800 reviews</p>
+        </div>
         <h2>User Reviews</h2>
         
         <!-- Review 1 -->
         <div class="review">
-            <img src="https://p0.pxfuel.com/preview/399/258/365/boy-face-blur-indian-royalty-free-thumbnail.jpg" alt="Reviewer 1" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
+            <img src="https://p0.pxfuel.com/preview/399/258/365/boy-face-blur-indian-royalty-free-thumbnail.jpg">
             <div>
-                <h3>Jane Doe</h3>
+                <h3>Siddharth</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>This product is amazing! It exceeded my expectations and I would highly recommend it to anyone.</p>
+                <p>I couldn’t believe how easy it was to install. Just peel off the backing and stick it on the wall. It’s up in seconds and looks fantastic. No drilling or nails required – perfect for renters like me!</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/71DNOJ05uML.jpg" class="review-image" alt="Dress 1" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/81GrustqvUL.jpg" class="review-image" alt="Dress 2" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/714Wf01YoQL.jpg" class="review-image" alt="Dress 1" onclick="openModal('https://m.media-amazon.com/images/I/714Wf01YoQL.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/B1wDI7r7C6S.jpg" class="review-image" alt="Dress 2" onclick="openModal('https://m.media-amazon.com/images/I/B1wDI7r7C6S.jpg')">
                 </div>
+                
+                <!-- Modal for image preview -->
+                <div id="myModal" class="modal">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <img class="modal-content" id="img01" />
+                </div>
+                
             </div>
         </div>
 
@@ -651,12 +726,12 @@
         <div class="review">
             <img src="https://th.bing.com/th/id/OIP.Ep07we1LvdYXc7jL6tAbaAHaLH?rs=1&pid=ImgDetMain" alt="Reviewer 2" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
             <div>
-                <h3>John Smith</h3>
+                <h3>Saanvi</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>Great value for money. The features are exactly as described, and it works flawlessly.</p>
+                <p>I love the contemporary, vertical design of this mirror. It’s a great accent piece for my bedroom. The reflective quality is excellent, and it’s still as good as new even after several months.</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" class="review-image" alt="Dress 3" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/71DNOJ05uML.jpg" class="review-image" alt="Dress 4" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/61uuN9-ncdL._SL1600_.jpg" class="review-image" alt="Dress 3" onclick="openModal('https://m.media-amazon.com/images/I/61uuN9-ncdL._SL1600_.jpg')">
+                    
                 </div>
             </div>
         </div>
@@ -665,12 +740,12 @@
         <div class="review">
             <img src="https://roesome.com/wp-content/uploads/2013/05/Portrait-Photography-in-Bangalore-Teenage-Portraits-3.jpg" alt="Reviewer 3" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
             <div>
-                <h3>Alice Brown</h3>
+                <h3>Shruti</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>The camera quality is amazing! Best smartphone I have ever used.</p>
+                <p>I put this mirror in my entryway, and it completely transformed the space. It adds a lot of light and makes the area feel bigger. The installation was super quick and simple. Definitely worth it!</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/81GrustqvUL.jpg" class="review-image" alt="Dress 5" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg" class="review-image" alt="Dress 6" onclick="openModal('https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/611hj3dRLcL.jpg" class="review-image" alt="Dress 5" onclick="openModal('https://m.media-amazon.com/images/I/611hj3dRLcL.jpg')">
+                    
                 </div>
             </div>
         </div>
@@ -679,96 +754,85 @@
         <div class="review">
             <img src="https://th.bing.com/th/id/OIP.kVPmqzKQ5eUfADLWSiJ52gHaHa?rs=1&pid=ImgDetMain" alt="Reviewer 4" onclick="openModal('https://m.media-amazon.com/images/I/41lTRT5n1lL._SY445_.jpg')">
             <div>
-                <h3>David Miller</h3>
+                <h3>Ishan</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>I am very happy with this product. The design is sleek, and the performance is top-notch!</p>
+                <p>I love how sleek and stylish this mirror is. It’s perfect for narrow spaces where traditional mirrors wouldn’t fit. It’s also surprisingly durable, and the reflective quality is just as good as any regular mirror.</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/41lTRT5n1lL._SY445_.jpg" class="review-image" alt="Dress 7" onclick="openModal('https://m.media-amazon.com/images/I/41lTRT5n1lL._SY445_.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/71DNOJ05uML.jpg" class="review-image" alt="Dress 8" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
+                    <img src="https://m.media-amazon.com/images/I/71loBw8pVUL.jpg" class="review-image" alt="Dress 7" onclick="openModal('https://m.media-amazon.com/images/I/71loBw8pVUL.jpg')">
+                    
                 </div>
             </div>
         </div>
 
         <!-- Review 5 -->
         <div class="review">
-            <img src="https://ruralindiaonline.org/media/images/IMG_3458_Mohammed_Afsal_T.P..height-1080.jpg" alt="Reviewer 5" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+            <img src="https://ruralindiaonline.org/media/images/IMG_3458_Mohammed_Afsal_T.P..height-1080.jpg">
             <div>
-                <h3>Emily Johnson</h3>
+                <h3>Aryan</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>The battery life lasts longer than expected! Very impressed with its efficiency.</p>
+                <p>Great mirror, provides instant style and brightness in any room.</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg" class="review-image" alt="Dress 9" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/71DNOJ05uML.jpg" class="review-image" alt="Dress 10" onclick="openModal('https://m.media-amazon.com/images/I/71DNOJ05uML.jpg')">
                 </div>
             </div>
         </div>
 
         <!-- Review 6 -->
         <div class="review">
-            <img src="https://th.bing.com/th/id/OIP.-TYq2e789dn0WQY1aaALMwAAAA?w=400&h=500&rs=1&pid=ImgDetMain" alt="Reviewer 6" onclick="openModal('https://m.media-amazon.com/images/I/71GrustqvUL.jpg')">
+            <img src="https://th.bing.com/th/id/OIP.-TYq2e789dn0WQY1aaALMwAAAA?w=400&h=500&rs=1&pid=ImgDetMain">
             <div>
-                <h3>George Wilson</h3>
+                <h3>Karan</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>Truly a remarkable product! I love the speed and fluidity of this device.</p>
+                <p>The vertical design fits beautifully in my hallway, very functional.</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/71GrustqvUL.jpg" class="review-image" alt="Dress 11" onclick="openModal('https://m.media-amazon.com/images/I/71GrustqvUL.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg" class="review-image" alt="Dress 12" onclick="openModal('https://m.media-amazon.com/images/I/71Mgmay88QL._SX679_.jpg')">
                 </div>
             </div>
         </div>
 
         <!-- Review 7 -->
         <div class="review">
-            <img src="https://ruralindiaonline.org/media/original_images/Fazhar_Ghosh_FACE_31.jpg" alt="Reviewer 7" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+            <img src="https://ruralindiaonline.org/media/original_images/Fazhar_Ghosh_FACE_31.jpg">
             <div>
-                <h3>Jessica Clark</h3>
+                <h3>Arjun</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>This phone's camera is the best in its class. Highly recommend for anyone looking for a great mobile photography experience.</p>
+                <p>Perfect for narrow spaces, easy to install, and looks great at such a cheap price!</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg" class="review-image" alt="Dress 13" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/71GrustqvUL.jpg" class="review-image" alt="Dress 14" onclick="openModal('https://m.media-amazon.com/images/I/71GrustqvUL.jpg')">
                 </div>
             </div>
         </div>
 
         <!-- Review 8 -->
         <div class="review">
-            <img src="https://www.dakshana.org/wp-content/uploads/2017/10/2597.png" alt="Reviewer 8" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
+            <img src="https://www.dakshana.org/wp-content/uploads/2017/10/2597.png">
             <div>
-                <h3>Michael Evans</h3>
+                <h3>Dev</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>The device is super fast, and the display quality is stunning! I am loving it so far.</p>
+                <p>Great mirror, provides instant style and brightness in any room, and the price can’t be beaten!</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/81GrustqvUL.jpg" class="review-image" alt="Dress 15" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg" class="review-image" alt="Dress 16" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
                 </div>
             </div>
         </div>
 
         <!-- Review 9 -->
         <div class="review">
-            <img src="https://images.squarespace-cdn.com/content/v1/605038d5d854783f2f2ef64c/1615953310692-Y3HQVWQD6O9H6IT3CK3B/Victims-of-Rana-Plaza_2.jpg" alt="Reviewer 9" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
+            <img src="https://images.squarespace-cdn.com/content/v1/605038d5d854783f2f2ef64c/1615953310692-Y3HQVWQD6O9H6IT3CK3B/Victims-of-Rana-Plaza_2.jpg">
             <div>
-                <h3>Sophie Adams</h3>
+                <h3>Kavya</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>I can't get enough of this phone. It's fast, sleek, and stylish.</p>
+                <p>I love how this mirror adds openness and light to my small living space, and it’s so affordable!</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" class="review-image" alt="Dress 17" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/81GrustqvUL.jpg" class="review-image" alt="Dress 18" onclick="openModal('https://m.media-amazon.com/images/I/81GrustqvUL.jpg')">
                 </div>
             </div>
         </div>
 
         <!-- Review 10 -->
         <div class="review">
-            <img src="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png" alt="Reviewer 10" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
+            <img src="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png">
             <div>
-                <h3>Lucas Carter</h3>
+                <h3>Misha</h3>
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>Solid purchase, highly recommend this phone for anyone who values camera performance and battery life!</p>
+                <p>Adds a sleek, modern touch to my bathroom with no hassle, and the price is unbeatable!</p>
                 <div class="review-images">
-                    <img src="https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg" class="review-image" alt="Dress 19" onclick="openModal('https://m.media-amazon.com/images/I/71g0eynUajL._SX679_.jpg')">
-                    <img src="https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg" class="review-image" alt="Dress 20" onclick="openModal('https://m.media-amazon.com/images/I/81D3oF3+TAL._SX679_.jpg')">
+                    
                 </div>
             </div>
         </div>
@@ -891,7 +955,7 @@
 
 
     <footer>
-        <p>&copy; 2024 Your Company. All rights reserved.</p>
+        <p>&copy; 2025 Flipora-Market. All rights reserved.</p>
         <p>
             <a href="#">Privacy Policy</a> | 
             <a href="#">Terms of Service</a>
