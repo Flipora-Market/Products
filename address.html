@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Address Entry Form</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Header Styles */
+    .header {
+      width: 100%;
+      background-color: #007bff;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header img.logo {
+      height: 50px;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      margin-top: 2rem;
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      color: #333;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .error-message {
+      color: #ff0000;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    .next-button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .next-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 1rem;
+      }
+
+      input, select {
+        padding: 0.5rem;
+      }
+
+      .next-button {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <div class="header">
+    <img src="https://pnghq.com/wp-content/uploads/delivery-png-2051-download-58716.png" alt="Logo" class="logo">
+    <h1>Address Entry Form</h1>
+  </div>
+
+  <!-- Form Container -->
+  <div class="form-container">
+    <h2>Enter Your Address</h2>
+    <form id="addressForm">
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Andrus" required>
+        <span class="error-message" id="fullNameError"></span>
+      </div>
+
+      <!-- Address Line 1 -->
+      <div class="form-group">
+        <label for="addressLine1">Address Line 1</label>
+        <input type="text" id="addressLine1" name="addressLine1" placeholder="123 Main St" required>
+        <span class="error-message" id="addressLine1Error"></span>
+      </div>
+
+      <!-- Address Line 2 -->
+      <div class="form-group">
+        <label for="addressLine2">Address Line 2</label>
+        <input type="text" id="addressLine2" name="addressLine2" placeholder="Apt 4B">
+      </div>
+
+      <!-- City -->
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" placeholder="Bangalore" required>
+        <span class="error-message" id="cityError"></span>
+      </div>
+
+      <!-- State -->
+      <div class="form-group">
+        <label for="state">State</label>
+        <input type="text" id="state" name="state" placeholder="Delhi" required>
+        <span class="error-message" id="stateError"></span>
+      </div>
+
+      <!-- Zip Code -->
+      <div class="form-group">
+        <label for="zipCode">Pin Code</label>
+        <input type="text" id="zipCode" name="zipCode" placeholder="623478" required>
+        <span class="error-message" id="zipCodeError"></span>
+      </div>
+
+      <!-- Country -->
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select id="country" name="country" required>
+          <option value="">Select Country</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="UK">United Kingdom</option>
+          <option value="In">India</option>
+          <!-- Add more countries as needed -->
+        </select>
+        <span class="error-message" id="countryError"></span>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+91 923 456 7890" required>
+        <span class="error-message" id="phoneError"></span>
+      </div>
+
+      <!-- Next to Payment Button -->
+      <button type="submit" class="next-button">Next to Payment</button>
+    </form>
+  </div>
+
+  
+<script>
+    // Listen for form submission to ensure validation is handled before redirecting
+    document.getElementById('addressForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        let isValid = true;
+
+        // Validate Full Name
+        const fullName = document.getElementById('fullName').value.trim();
+        if (fullName === '') {
+            document.getElementById('fullNameError').textContent = 'Full Name is required';
+            document.getElementById('fullNameError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('fullNameError').style.display = 'none';
+        }
+
+        // Validate Address Line 1
+        const addressLine1 = document.getElementById('addressLine1').value.trim();
+        if (addressLine1 === '') {
+            document.getElementById('addressLine1Error').textContent = 'Address Line 1 is required';
+            document.getElementById('addressLine1Error').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('addressLine1Error').style.display = 'none';
+        }
+
+        // Validate City
+        const city = document.getElementById('city').value.trim();
+        if (city === '') {
+            document.getElementById('cityError').textContent = 'City is required';
+            document.getElementById('cityError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('cityError').style.display = 'none';
+        }
+
+        // Validate State
+        const state = document.getElementById('state').value.trim();
+        if (state === '') {
+            document.getElementById('stateError').textContent = 'State is required';
+            document.getElementById('stateError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('stateError').style.display = 'none';
+        }
+
+        // Validate Zip Code
+        const zipCode = document.getElementById('zipCode').value.trim();
+        if (zipCode === '' || !/^\d{6}$/.test(zipCode)) {
+            document.getElementById('zipCodeError').textContent = 'Pin Code must be exactly 6 digits';
+            document.getElementById('zipCodeError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('zipCodeError').style.display = 'none';
+        }
+
+        // Validate Country
+        const country = document.getElementById('country').value;
+        if (country === '') {
+            document.getElementById('countryError').textContent = 'Country is required';
+            document.getElementById('countryError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('countryError').style.display = 'none';
+        }
+
+        // Validate Phone Number
+        const phone = document.getElementById('phone').value.trim();
+        if (phone === '' || !/^\+?[0-9\s\-]+$/.test(phone)) {
+            document.getElementById('phoneError').textContent = 'Valid Phone Number is required';
+            document.getElementById('phoneError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('phoneError').style.display = 'none';
+        }
+
+        // If all fields are valid, proceed to the next page (payment page)
+        if (isValid) {
+            alert('Address submitted successfully! Redirecting to payment page...');
+            window.location.href = "file:///C:/Users/anand/OneDrive/Desktop/paymentpage.html"; // Redirect to payment page
+        }
+    });
+</script>
+
+
+
+</body>
+</html>

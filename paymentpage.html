@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Page</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .payment-container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .payment-method:hover {
+      background: #e9e9e9;
+    }
+
+    .payment-method img {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+    }
+
+    .payment-method span {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .payment-method.selected {
+      border-color: #007bff;
+      background: #e3f2fd;
+    }
+
+    .payment-method.selected span {
+      color: #007bff;
+    }
+
+    .upi-id-input {
+      margin-top: 20px;
+      display: none; /* Hidden by default */
+    }
+
+    .upi-id-input label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    .upi-id-input input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .upi-id-input input:focus {
+      border-color: #007bff;
+    }
+
+    .pay-button {
+      width: 100%;
+      padding: 15px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .pay-button:hover {
+      background: #0056b3;
+    }
+
+    /* Preference Option */
+    .preference-option {
+      margin-top: 20px;
+      text-align: center;
+      display: none; /* Hidden by default */
+    }
+
+    .preference-option a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .preference-option a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .payment-container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .payment-method span {
+        font-size: 14px;
+      }
+
+      .pay-button {
+        font-size: 14px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-container">
+    <h1>Choose Payment Method</h1>
+    <div class="payment-methods">
+      <div class="payment-method" onclick="selectPaymentMethod(this, false)">
+        <img src="https://static.vecteezy.com/system/resources/previews/021/672/632/original/google-pay-logo-transparent-free-png.png" alt="Google Pay">
+        <span>Google Pay</span>
+      </div>
+      <div class="payment-method" onclick="selectPaymentMethod(this, false)">
+        <img src="https://cdn.freelogovectors.net/wp-content/uploads/2023/11/phonepe_logo-freelogovectors.net_.png" alt="PhonePe">
+        <span>PhonePe</span>
+      </div>
+      <div class="payment-method" onclick="selectPaymentMethod(this, false)">
+        <img src="https://pnghq.com/wp-content/uploads/2023/02/paytm-transparent-logo-png-1542-1024x336.png" alt="Paytm">
+        <span>Paytm</span>
+      </div>
+      <div class="payment-method" onclick="selectPaymentMethod(this, true)">
+        <img src="https://www.nicepng.com/png/full/360-3606562_bhim-logo-bhim-upi.png" alt="BHIM">
+        <span>Other App UPI</span>
+      </div>
+    </div>
+    <div class="upi-id-input" id="upi-id-container">
+      <label for="upi-id">Enter UPI ID</label>
+      <input type="text" id="upi-id" placeholder="e.g., yourname@upi">
+    </div>
+    <div class="preference-option" id="preference-option">
+      <p>App not installed. <a href="#" id="install-link">Install now</a> or use another method.</p>
+    </div>
+    <button class="pay-button" onclick="processPayment()">Pay Now</button>
+  </div>
+
+  <script>
+    // Deep links for apps
+    const appLinks = {
+      'Google Pay': { deepLink: 'tez://upi/pay?pa=yourupi@upi&pn=YourName&mc=1234&tid=123456&txn=123456&amount=100', installLink: 'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user' },
+      'PhonePe': { deepLink: 'phonepe://pay?pa=yourupi@upi&pn=YourName&mc=1234&tid=123456&txn=123456&amount=100', installLink: 'https://play.google.com/store/apps/details?id=com.phonepe.app' },
+      'Paytm': { deepLink: 'paytmmp://pay?pa=yourupi@upi&pn=YourName&mc=1234&tid=123456&txn=123456&amount=100', installLink: 'https://play.google.com/store/apps/details?id=net.one97.paytm' },
+    };
+
+    function selectPaymentMethod(element, showUpiField) {
+      // Remove selected class from all methods
+      const methods = document.querySelectorAll('.payment-method');
+      methods.forEach(method => method.classList.remove('selected'));
+
+      // Add selected class to the clicked method
+      element.classList.add('selected');
+
+      // Show or hide UPI ID field based on the selected method
+      const upiIdContainer = document.getElementById('upi-id-container');
+      if (showUpiField) {
+        upiIdContainer.style.display = 'block';
+      } else {
+        upiIdContainer.style.display = 'none';
+      }
+
+      // Hide preference option by default
+      document.getElementById('preference-option').style.display = 'none';
+    }
+
+    function processPayment() {
+      const selectedMethod = document.querySelector('.payment-method.selected');
+      const upiId = document.getElementById('upi-id').value;
+      const upiIdContainer = document.getElementById('upi-id-container');
+      const preferenceOption = document.getElementById('preference-option');
+      const installLink = document.getElementById('install-link');
+
+      if (!selectedMethod) {
+        alert('Please select a payment method.');
+        return;
+      }
+
+      // Get the selected method name
+      const methodName = selectedMethod.querySelector('span').innerText;
+
+      // If "Other App UPI" is selected, validate UPI ID
+      if (upiIdContainer.style.display === 'block' && !upiId) {
+        alert('Please enter your UPI ID.');
+        return;
+      }
+
+      // Check if the selected method is not "Other App UPI"
+      if (methodName !== 'Other App UPI') {
+        const appData = appLinks[methodName];
+        if (!appData) {
+          alert('Invalid payment method.');
+          return;
+        }
+
+        // Try to open the app using deep link
+        window.location.href = appData.deepLink;
+
+        // If the app is not installed, show the preference option
+        setTimeout(() => {
+          preferenceOption.style.display = 'block';
+          installLink.href = appData.installLink;
+        }, 1000); // Wait 1 second to check if the app opened
+      } else {
+        // For "Other App UPI", simulate payment processing
+        alert(`Processing payment via ${methodName} for UPI ID: ${upiId}`);
+      }
+    }
+  </script>
+</body>
+</html>
