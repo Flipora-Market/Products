@@ -195,9 +195,9 @@
 
   <script>
     const appLinks = {
-      'Google Pay': { deepLink: 'upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user' },
-      'PhonePe': { deepLink: 'upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.phonepe.app' },
-      'Paytm': { deepLink: 'upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=net.one97.paytm' },
+      'Google Pay': { deepLink: 'tez://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user' },
+      'PhonePe': { deepLink: 'phonepe://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.phonepe.app' },
+      'Paytm': { deepLink: 'paytmmp://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=net.one97.paytm' },
     };
 
     function selectPaymentMethod(element, showUpiField) {
@@ -243,17 +243,17 @@
 
       // Check if the selected method is Google Pay
       if (methodName === 'Google Pay') {
-        const googlePayDeepLink = `upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00`;
+        const googlePayDeepLink = `upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00`;
         window.location.href = googlePayDeepLink;
       }
       // Check if the selected method is PhonePe
       else if (methodName === 'PhonePe') {
-        const phonePeDeepLink = `phonepe://upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00`;
+        const phonePeDeepLink = `upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00`;
         window.location.href = phonePeDeepLink;
       }
       // Check if the selected method is Paytm
       else if (methodName === 'Paytm') {
-        const paytmDeepLink = `paytmmp://upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00`;
+        const paytmDeepLink = `upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00`;
         window.location.href = paytmDeepLink;
       }
       else {
