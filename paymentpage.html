@@ -194,11 +194,10 @@
   </div>
 
   <script>
-    // Deep links for apps
     const appLinks = {
-      'Google Pay': { deepLink: 'tez://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user' },
-      'PhonePe': { deepLink: 'phonepe://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.phonepe.app' },
-      'Paytm': { deepLink: 'paytmmp://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=net.one97.paytm' },
+      'Google Pay': { deepLink: 'upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user' },
+      'PhonePe': { deepLink: 'phonepe://upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.phonepe.app' },
+      'Paytm': { deepLink: 'paytmmp://upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=net.one97.paytm' },
     };
 
     function selectPaymentMethod(element, showUpiField) {
@@ -242,26 +241,30 @@
         return;
       }
 
-      // Check if the selected method is not "Other App UPI"
-      if (methodName !== 'Other App UPI') {
-        const appData = appLinks[methodName];
-        if (!appData) {
-          alert('Invalid payment method.');
-          return;
-        }
-
-        // Try to open the app using deep link
-        window.location.href = appData.deepLink;
-
-        // If the app is not installed, show the preference option
-        setTimeout(() => {
-          preferenceOption.style.display = 'block';
-          installLink.href = appData.installLink;
-        }, 1000); // Wait 1 second to check if the app opened
-      } else {
-        // For "Other App UPI", simulate payment processing
-        alert(`Processing payment via ${methodName} for UPI ID: ${upiId}`);
+      // Check if the selected method is Google Pay
+      if (methodName === 'Google Pay') {
+        const googlePayDeepLink = `upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00`;
+        window.location.href = googlePayDeepLink;
       }
+      // Check if the selected method is PhonePe
+      else if (methodName === 'PhonePe') {
+        const phonePeDeepLink = `phonepe://upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00`;
+        window.location.href = phonePeDeepLink;
+      }
+      // Check if the selected method is Paytm
+      else if (methodName === 'Paytm') {
+        const paytmDeepLink = `paytmmp://upi://pay?ver=01&mode=19&pa=shakthi107014.rzp@icici&pn=Shivahi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivahi&am=79.00`;
+        window.location.href = paytmDeepLink;
+      }
+      else {
+        alert('Invalid payment method selected.');
+      }
+
+      // If the app is not installed, show the preference option
+      setTimeout(() => {
+        preferenceOption.style.display = 'block';
+        installLink.href = appLinks[methodName]?.installLink || '#';
+      }, 1000); // Wait 1 second to check if the app opened
     }
   </script>
 </body>
