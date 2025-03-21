@@ -164,7 +164,7 @@
 </head>
 <body>
   <div class="payment-container">
-    <h1>Choose Payment Method</h1>
+    <h1>Fast and Secure Payment Method</h1>
     <div class="payment-methods">
       <div class="payment-method" onclick="selectPaymentMethod(this, false)">
         <img src="https://static.vecteezy.com/system/resources/previews/021/672/632/original/google-pay-logo-transparent-free-png.png" alt="Google Pay">
@@ -196,9 +196,9 @@
   <script>
     // Deep links for apps
     const appLinks = {
-      'Google Pay': { deepLink: 'tez://upi/pay?pa=yourupi@upi&pn=YourName&mc=1234&tid=123456&txn=123456&amount=100', installLink: 'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user' },
-      'PhonePe': { deepLink: 'phonepe://pay?pa=yourupi@upi&pn=YourName&mc=1234&tid=123456&txn=123456&amount=100', installLink: 'https://play.google.com/store/apps/details?id=com.phonepe.app' },
-      'Paytm': { deepLink: 'paytmmp://pay?pa=yourupi@upi&pn=YourName&mc=1234&tid=123456&txn=123456&amount=100', installLink: 'https://play.google.com/store/apps/details?id=net.one97.paytm' },
+      'Google Pay': { deepLink: 'tez://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user' },
+      'PhonePe': { deepLink: 'phonepe://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=com.phonepe.app' },
+      'Paytm': { deepLink: 'paytmmp://upi://pay?ver=01&mode=19&pa=shivashakthi107014.rzp@icici&pn=ShivaShakthi&tr=RZPPmcwloDIDvTIFdqrv2&cu=INR&mc=5651&qrMedium=04&tn=PaymenttoShivaShakthi&am=79.00', installLink: 'https://play.google.com/store/apps/details?id=net.one97.paytm' },
     };
 
     function selectPaymentMethod(element, showUpiField) {
